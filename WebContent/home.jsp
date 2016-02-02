@@ -4,12 +4,30 @@
 	<c:param name="title" value="Picture Squirrel Home"></c:param>
 </c:import>
 
-<sql:setDataSource var="ds" dataSource="jdbc/webshop" />
+<sql:setDataSource var="ds" dataSource="jdbc/webshop" /> <%-- Don't need to declare this in web.xml only on the tomcat server! --%>
 
-<sql:query dataSource="${ds}" sql="select * from images limit 10" var="result" />
+<sql:query dataSource="${ds}" sql="select * from images order by id" var="results" />
 
-<c:forEach var="image" items="${results.rows}">
-	<p>${image.stem}.${image.extension}</p>
+<table class="images">
+
+<c:set var="tablewidth" value="8" />
+
+<c:forEach var="image" items="${results.rows}" varStatus="row">
+	<c:if test="${row.index % tablewidth == 0}">
+		<tr>
+	</c:if>
+	<c:set scope="page" var="imgname" value="${image.stem}.${image.image_extension}" />
+	<td>
+		<a href="<c:url value="/gallery?action=image&image=${image.id}" />">
+			<img width="80" src="${pageContext.request.contextPath}/pics/${imgname}" />
+		</a>
+	</td>
+	<c:if test="${row.index + 1 % tablewidth == 0}">
+		</tr>
+	</c:if>
+	
 </c:forEach>
+
+</table>
 
 <c:import url="footer.jsp"></c:import>
