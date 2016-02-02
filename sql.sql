@@ -1,3 +1,15 @@
+CREATE TABLE `webshop`.`images` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `stem` VARCHAR(45) NULL,
+  `attribution_url` VARCHAR(255) NULL,
+  `attribution_name` VARCHAR(45) NULL,
+  `image_extension` VARCHAR(45) NULL,
+  `rankings` INT NULL,
+  `average_ranking` INT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
+
+
 insert into webshop.images (`stem`, `attribution_url`, `attribution_name`, `image_extension`, `rankings`, `average_ranking`) values ('aeroplane','http://blahblah.com','blahblah','jpg',1,0);
 insert into webshop.images (`stem`, `attribution_url`, `attribution_name`, `image_extension`, `rankings`, `average_ranking`) values ('apple','http://blahblah.com','blahblah','jpg',1,0);
 insert into webshop.images (`stem`, `attribution_url`, `attribution_name`, `image_extension`, `rankings`, `average_ranking`) values ('baby','http://blahblah.com','blahblah','jpg',1,0);
